@@ -46,9 +46,12 @@ in stdenv.mkDerivation rec {
     mkdir -p $out/google-cloud-sdk
     cp -R * .install $out/google-cloud-sdk/
 
+    $out/google-cloud-sdk/bin/gcloud components install beta bigtable
+
     mkdir -p $out/google-cloud-sdk/lib/surface/{alpha,beta}
     cp ${./alpha__init__.py} $out/google-cloud-sdk/lib/surface/alpha/__init__.py
     cp ${./beta__init__.py} $out/google-cloud-sdk/lib/surface/beta/__init__.py
+
 
     # create wrappers with correct env
     for program in gcloud bq gsutil git-credential-gcloud.sh docker-credential-gcloud bigtable; do
